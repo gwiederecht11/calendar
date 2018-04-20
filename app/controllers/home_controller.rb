@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   end
 
   def new
-  	redirect_to create_path
+  	redirect_to events_new_path
   end
 end
