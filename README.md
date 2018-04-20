@@ -1,7 +1,8 @@
-# README
+# calendar
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application automatically ports user's google calendars to make it easier for groups to find time when everyone's free. Like when2meet, but better!
+
+Team members: Tracy Lam, Geoffrey Wiederecht, Jessica Yeh
 
 Things you may want to cover:
 
