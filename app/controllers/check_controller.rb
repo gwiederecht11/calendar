@@ -1,9 +1,10 @@
 class CheckController < ApplicationController
 
-  CALENDAR_ID = Rails.application.secrets.calendarId
+  # CALENDAR_ID = Rails.application.secrets.calendarId
 
   def calendars
-	 client = Signet::OAuth2::Client.new(client_options)
+
+	  client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
 
     service = Google::Apis::CalendarV3::CalendarService.new
@@ -15,19 +16,45 @@ class CheckController < ApplicationController
   end
 
   def events
+
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
+    calendar_list = service.list_calendar_lists
 
     # response = client.execute(api_method: @service.calendar_list.list) 
-    calendar_id = CALENDAR_ID
+    # calendar_id = CALENDAR_ID
 
+    # calendar_id = calendar_id()
     # @event_list = service.list_events(params[:calendar_id])
-    @event_list = service.list_events(calendar_id)
+    # @event_list = service.list_events(calendar_id)
+
+
+    calendar_list.items.each { |calendar| 
+      if calendar.primary == true
+        calendarid = calendar.id
+      end 
+    }
+
+    @event_list = service.list_events(calendarid)
+
 
   end
+
+  # def calendar_id()  
+  #   client = Signet::OAuth2::Client.new(client_options)
+  #   client.update!(session[:authorization])
+  #   service = Google::Apis::CalendarV3::CalendarService.new
+  #   service.authorization = client
+  #   response = @client.execute(api_method:     
+  #     service.calendar_list.list)
+  #   calendars = JSON.parse(response.body)
+  #   calendar = calendars["items"].select {|cal| 
+  #     cal["primary"] == true}
+  #   calendar["id"]
+  # end 
 
 
   # def calendar_id(schedule)  
