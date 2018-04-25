@@ -33,12 +33,12 @@ class CheckController < ApplicationController
 
 
     calendar_list.items.each { |calendar| 
-      if calendar.primary == true
+      if calendar.primary
         calendarid = calendar.id
+        @event_list = service.list_events(calendarid)
       end 
     }
 
-    @event_list = service.list_events(calendarid)
 
 
   end
