@@ -1,7 +1,7 @@
 class CheckController < ApplicationController
 
   def calendars
-	client = Signet::OAuth2::Client.new(client_options)
+	 client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
 
     service = Google::Apis::CalendarV3::CalendarService.new

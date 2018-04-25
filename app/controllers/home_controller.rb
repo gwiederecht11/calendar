@@ -10,6 +10,11 @@ class HomeController < ApplicationController
   	redirect_to calendars_path
   end
 
+  def events
+    redirect_to events_path 
+  end 
+
+
   def redirect
     client = Signet::OAuth2::Client.new(client_options)
 
