@@ -1,5 +1,7 @@
 class CheckController < ApplicationController
 
+  CALENDAR_ID = Rails.application.secrets.calendarId
+
   def calendars
 	 client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
@@ -19,8 +21,26 @@ class CheckController < ApplicationController
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
 
-    @event_list = service.list_events(params[:calendar_id])
+    # response = client.execute(api_method: @service.calendar_list.list) 
+    calendar_id = CALENDAR_ID
+
+    # @event_list = service.list_events(params[:calendar_id])
+    @event_list = service.list_events(calendar_id)
+
   end
+
+
+  # def calendar_id(schedule)  
+  # response = @client.execute(api_method:     
+  #   @service.calendar_list.list)
+
+  # calendars = JSON.parse(response.body)
+
+  # calendar = calendars["items"].select {|cal| 
+  #   cal["id"].downcase == schedule.calendar_id}
+  # calendar["id"]
+  # end  
+
 
   private
 
