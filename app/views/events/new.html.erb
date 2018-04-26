@@ -38,7 +38,7 @@
 <br>
 <br>
 
-<%= form_tag new_event_path("gwiederecht11@berkeley.edu") do %>
+<%= form_tag new_event_path("tracylam@berkeley.edu") do %>
   <%= submit_tag 'Add event to your Google Calendar', class: "btn btn-primary"  %>
 <% end %>
 
@@ -47,6 +47,7 @@
  <% @events.each do |t| %>
   <%= t.name %>
   <%= t.date %>
+  <%= t.created_at %>
   <br>
  <% end %>
 
