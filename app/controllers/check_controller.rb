@@ -36,9 +36,28 @@ class CheckController < ApplicationController
       if not calendar.primary
         calendarid = calendar.id
         @event_list = service.list_events(calendarid)
-      end
+
+        # getting freebusy API
+
+        puts("getting FreeBusyRequest")
+        body = Google::Apis::CalendarV3::FreeBusyRequest.new
+	    body.items = [calendarid]
+	    body.time_min = '2018-03-20T11:04:00+0000'
+	 	body.time_max = '2018-04-20T11:04:00+0000'
+
+	    
+
+	    service = Google::Apis::CalendarV3::CalendarService.new
+		service.authorization = client
+		response = service.query_freebusy(body)
+
+		# do something with the response here
+		# 
+
+	  end 
     }
 
+	end
 
     @event_list = service.list_events('primary', time_max: '2017-02-13T23:59:59-07:00' , time_min: '2017-02-13T00:00:00-07:00')
 
@@ -54,7 +73,6 @@ class CheckController < ApplicationController
 
 
 
-  end
 
   def new_event
     client = Signet::OAuth2::Client.new(client_options)
