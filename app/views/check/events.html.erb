@@ -1,12 +1,56 @@
-<ul>
+<%= stylesheet_link_tag "events.scss" %>
+
+
+
+
   <% @event_list.items.each do |event| %>
-    <li><%= event.summary %> (<%= event.id %>)</li>
+    <!-- <li> -->
+	<div class = "green-rectangle"><ul>
+    	<p> Event:
+    	<%= event.summary %>
+    	</p>
+    	<p> Start:
+    	<%= event.start.date_time.hour %>
+    	</p>
+    	<p> End:
+    	<%= event.end.date_time.hour %>
+    	</p>
+    </div>
+    <!-- </li> -->
   <% end %>
 </ul>
 
 
-<ul>
+
+
+<font color="white">
   <% @event_list2.items.each do |event| %>
-    <li><%= event.summary %> (<%= event.id %>)</li>
+    <li>
+	<div class = "red-rectangle"><ul>
+    	<p> Event:
+    	<%= event.summary %>
+    	</p>
+    	<p> Start:
+    	<%= event.start.date_time.hour %>
+    	</p>
+    	<p> End:
+    	<%= event.end.date_time.hour %>
+    	</p>
+</div>
+
+	</li>
   <% end %>
+</font>
 </ul>
+
+
+<div class="blue-rectangle">
+	<h4>
+		Events Found:
+		<h5>
+			2:00PM - 3:00PM
+		</h5>
+	</h4>
+</div>
+
+

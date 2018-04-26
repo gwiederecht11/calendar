@@ -1,0 +1,16 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.blue-rectangle {
+background-color: rgba(3,78,136,0.7);
+padding: 10px 20px 10px 200px;
+margin-bottom: 20px;
+}
+
+/*.blue-rectangle p{
+color:white;
+text-transform: uppercase;
+font-size:18px;
+}*/

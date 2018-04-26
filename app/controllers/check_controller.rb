@@ -34,35 +34,18 @@ class CheckController < ApplicationController
     # @event_list = service.list_events(params[:calendar_id])
     # @event_list = service.list_events(calendar_id)
 
+    @event_list = service.list_events('primary', time_max: '2017-03-13T23:59:59-08:00' , time_min: '2017-03-13T00:00:00-08:00')
+
+
 
     calendar_list.items.each { |calendar|
       if not calendar.primary
         calendarid = calendar.id
-        @event_list = service.list_events(calendarid)
-
-        # getting freebusy API
-
-        puts("getting FreeBusyRequest")
-        body = Google::Apis::CalendarV3::FreeBusyRequest.new
-	    body.items = [calendarid]
-	    body.time_min = '2018-03-20T11:04:00+0000'
-	 	body.time_max = '2018-04-20T11:04:00+0000'
-
-	    
-
-	    service = Google::Apis::CalendarV3::CalendarService.new
-		service.authorization = client
-		response = service.query_freebusy(body)
-
-		# do something with the response here
-		# 
-
-	  end 
+        @event_list2 = service.list_events(calendarid, time_max: '2017-03-13T23:59:59-08:00' , time_min: '2017-03-13T00:00:00-08:00')
+	     end 
     }
 
 	end
-
-    
 
 
     # instance = DateTime.parse("2014-01-01 16:35:45 -0800")
