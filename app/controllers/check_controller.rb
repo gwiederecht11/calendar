@@ -33,11 +33,24 @@ class CheckController < ApplicationController
 
 
     calendar_list.items.each { |calendar|
-      if calendar.primary
+      if not calendar.primary
         calendarid = calendar.id
         @event_list = service.list_events(calendarid)
       end
     }
+
+
+    @event_list = service.list_events('primary', time_max: '2017-02-13T23:59:59-07:00' , time_min: '2017-02-13T00:00:00-07:00')
+
+
+
+    # instance = DateTime.parse("2014-01-01 16:35:45 -0800")
+    # d1       = DateTime.parse("2013-12-25 04:45:00 -0800")
+    # d2       = DateTime.parse("2015-12-25 5:00:01 -0800")
+    # p instance.between?( d1, d2 )
+
+
+
 
 
 
