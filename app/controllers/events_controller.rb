@@ -7,8 +7,6 @@ class EventsController < ApplicationController
 
   def create
 	@event = Event.create(new_params)
-	@event.name = params[:name]
-	@event.date = params[:date]
 	# @event.users << params[:user]
 	@event.save
 	redirect_to root_path
