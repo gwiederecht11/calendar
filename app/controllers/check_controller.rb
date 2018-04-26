@@ -24,7 +24,7 @@ class CheckController < ApplicationController
     service.authorization = client
     calendar_list = service.list_calendar_lists
 
-    # response = client.execute(api_method: @service.calendar_list.list) 
+    # response = client.execute(api_method: @service.calendar_list.list)
     # calendar_id = CALENDAR_ID
 
     # calendar_id = calendar_id()
@@ -32,7 +32,7 @@ class CheckController < ApplicationController
     # @event_list = service.list_events(calendar_id)
 
 
-    calendar_list.items.each { |calendar| 
+    calendar_list.items.each { |calendar|
       if calendar.primary
         calendarid = calendar.id
         @event_list = service.list_events(calendarid)
@@ -61,30 +61,50 @@ class CheckController < ApplicationController
 
 
 
-  # def calendar_id()  
+  def new_event
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    today = Date.today
+
+    event = Google::Apis::CalendarV3::Event.new({
+      start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
+      end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
+      summary: 'New event!'
+    })
+
+    service.insert_event(params[:calendar_id], event)
+
+    redirect_to events_url(calendar_id: params[:calendar_id])
+  end
+
+  # def calendar_id()
   #   client = Signet::OAuth2::Client.new(client_options)
   #   client.update!(session[:authorization])
   #   service = Google::Apis::CalendarV3::CalendarService.new
   #   service.authorization = client
-  #   response = @client.execute(api_method:     
+  #   response = @client.execute(api_method:
   #     service.calendar_list.list)
   #   calendars = JSON.parse(response.body)
-  #   calendar = calendars["items"].select {|cal| 
+  #   calendar = calendars["items"].select {|cal|
   #     cal["primary"] == true}
   #   calendar["id"]
-  # end 
+  # end
 
 
-  # def calendar_id(schedule)  
-  # response = @client.execute(api_method:     
+  # def calendar_id(schedule)
+  # response = @client.execute(api_method:
   #   @service.calendar_list.list)
 
   # calendars = JSON.parse(response.body)
 
-  # calendar = calendars["items"].select {|cal| 
+  # calendar = calendars["items"].select {|cal|
   #   cal["id"].downcase == schedule.calendar_id}
   # calendar["id"]
-  # end  
+  # end
 
 
   private
