@@ -27,9 +27,8 @@ Rails.application.routes.draw do
   get '/events/:calendar_id', to: 'home#events', calendar_id: /[^\/]+/
 
 
-
-
-
   post '/events/:calendar_id', to: 'check#new_event', as: 'new_event', calendar_id: /[^\/]+/
+
+  post 'events', to: 'events#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

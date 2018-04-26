@@ -24,6 +24,9 @@ class CheckController < ApplicationController
     service.authorization = client
     calendar_list = service.list_calendar_lists
 
+    @event_list = service.list_events('primary', time_max: '2017-02-13T23:59:59-07:00' , time_min: '2017-02-13T00:00:00-07:00')
+
+
     # response = client.execute(api_method: @service.calendar_list.list)
     # calendar_id = CALENDAR_ID
 
@@ -59,8 +62,7 @@ class CheckController < ApplicationController
 
 	end
 
-    @event_list = service.list_events('primary', time_max: '2017-02-13T23:59:59-07:00' , time_min: '2017-02-13T00:00:00-07:00')
-
+    
 
 
     # instance = DateTime.parse("2014-01-01 16:35:45 -0800")

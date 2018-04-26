@@ -1,5 +1,5 @@
 
-<h2> This is where we make an event! </h2>
+<h2> Create an Event </h2>
 
 <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
@@ -7,8 +7,54 @@
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
 
-<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+
+<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
 <div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+     <%= form_for @event do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+          <%= f.label :date %>
+          <%= f.text_field :date, class: 'form-control', "data-provide" => 'datepicker', zIndexOffset: '1001' %>
+          <br>
+          <%= f.submit 'Create Event', class: "btn btn-primary" %>
+    <% end %>
+
+   </div>
+  </div>
+ </div>
+</div>
+
+<br>
+<br>
+
+<%= form_tag new_event_path("gwiederecht11@berkeley.edu") do %>
+  <%= submit_tag 'Add event to your Google Calendar', class: "btn btn-primary"  %>
+<% end %>
+
+
+ <% @events.each do |t| %>
+  <%= t.name %>
+  <%= t.date %>
+  weird
+  <br>
+ <% end %>
+
+
+<!-- old code -->
+
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<!-- <div class="bootstrap-iso">
  <div class="container-fluid">
   <div class="row">
    <div class="col-md-6 col-sm-6 col-xs-12">
@@ -43,18 +89,10 @@
    </div>
   </div>
  </div>
-</div>
+</div> -->
 
 
-<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>
+<!-- <script>
     $(document).ready(function(){
         var date_input=$('input[name="date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -65,12 +103,4 @@
             multidate: true
         })
     })
-</script>
-
-
-
-
-
-<%= form_tag new_event_path("gwiederecht11@berkeley.edu") do %>
-  <%= submit_tag 'Add event' %>
-<% end %>
+</script> -->
